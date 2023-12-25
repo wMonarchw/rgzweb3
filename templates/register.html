@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <section>
+        <div><form action="/rgz/profile"><button class="button_header" type="submit">Профиль</button></form></div>
+        <div><form action="/rgz/glav"><button class="button_header" type="submit">Знакомства</button></form></div>
+        <div><form action="/rgz/login"><button class="button_header" type="submit">Логин</button></form></div>
+        <div><form action="/rgz/register"><button class="button_header" type="submit">Регистрация</button></form></div>
+        <div><form action="/rgz/logout"><button class="button_header" type="submit">Выйти</button></form></div>
+    </section>
+{% endblock %}
+
+{% block main%}
+    <div class="logreg">
+        <form id="registrationForm" method="POST" enctype="multipart/form-data">
+            <div class="step" id="step1">
+                <h2>Шаг 1: Пользовательская информация</h2>
+                <input type="text" name="name" placeholder="Имя" required>
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <button type="button" onclick="nextStep(1)">Далее</button>
+            </div>
+            <div class="step" id="step2">
+                <h2>Шаг 2: Выбор возраста и пола</h2>
+                <input type="number" name="age" min="18" max="99" placeholder="Возраст" required>
+                <select name="gender" required>
+                    <option value="">Выберите ваш пол</option>
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                </select>
+                <select name="partner_gender" required>
+                    <option value="">Выберите предпочитаемый пол партнера</option>
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                </select>
+                <button type="button" onclick="nextStep(2)">Далее</button>
+            </div>
+
+            <div class="step" id="step3">
+                <h2>Шаг 3: О себе</h2>
+                <textarea name="description" placeholder="Расскажите о себе"></textarea>
+                <button type="button" onclick="nextStep(3)">Далее</button>
+            </div>
+
+            <div class="step" id="step4">
+                <h2>Шаг 4: Загрузка фото</h2>
+                <input type="file" name="file" required>
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            var currentStep = document.getElementById("step" + step);
+            var nextStep = document.getElementById("step" + (step + 1));
+
+            currentStep.style.display = "none";
+            nextStep.style.display = "block";
+        }
+    </script>
+{% endblock %}
