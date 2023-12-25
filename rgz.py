@@ -40,7 +40,7 @@ def login():
     if my_user is not None:
         if check_password_hash(my_user.password, password_form):
             login_user(my_user, remember = False)
-            return redirect('/rgz/')
+            return redirect('/rgz/glav')
         else: 
             errors.append("Неправильный пароль")
             return render_template('login.html', errors=errors)
@@ -107,7 +107,7 @@ def handle_register():
             db.session.commit()
 
         # Возвращаем успешный результат
-        return redirect('/rgz/')
+        return redirect('/rgz/glav')
 
     return render_template('register.html')
 
